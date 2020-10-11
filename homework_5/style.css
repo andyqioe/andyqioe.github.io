@@ -359,13 +359,6 @@ h2 {
     transition-duration: .5s;
 }
 
-.description button:onclick {
-    opacity:.5;
-    background-color: #48b97b;
-    color: #704F1F;
-    transition-duration: .5s;
-}
-
 /*for the homepage*/
 
 .row {
@@ -479,7 +472,6 @@ h2 {
 .row2 {
     max-width:1440px;
     display:flex;
-    align-items: space-between;
 }
 
 .product img{
