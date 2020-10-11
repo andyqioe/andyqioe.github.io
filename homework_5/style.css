@@ -73,18 +73,22 @@ nav {
     text-align: right;  
 }
 
-nav ul{
+nav ul {
     display: inline-block;
     list-style-type: none;
 }
 
-nav ul li{
+nav ul li {
     display: inline-block;
     flex-wrap: nowrap;
     align-items: center;
     align-content: center;
     justify-content: center;
     margin-right: 20px;
+}
+
+nav ul li:hover {
+    color:#48b2b9
 }
 /*general controls for appearance*/
 a {
@@ -478,7 +482,7 @@ h2 {
     align-items: space-between;
 }
 
-#product {
+.product img{
     height: 500px;
     padding-right: 40px;
 }
