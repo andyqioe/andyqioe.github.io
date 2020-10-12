@@ -327,7 +327,7 @@ h2 {
 .description h1{
     font-size: 48px;
 }
-.description p{
+.description p {
     display:flex;
     flex-direction: column;
     margin-top: 50px
