@@ -332,24 +332,17 @@ h2 {
     flex-direction: column;
     margin-top: 50px
 }
-.description button {
-    font-size: 18px;
-    color: #fff;
-    background-color:#704F1F;
-    border: transparent;
-    border-radius: 25px;
-    margin-top: 180px;
-    padding: 20px;
-    
-}
 
-
-.description button a{
-    display:flex;
-    justify-content: center;
-    color:white;
-    font-size: 18px;
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
     text-decoration: none;
+    color: #fff;
+
+    background-color: #704F1F;
+    border-radius: 25px;
+    padding: 20px;
 }
 
 .description button:hover {
