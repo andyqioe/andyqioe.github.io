@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title> Page Title </title>
+    <title> Product Description </title>
     <link rel="stylesheet" href="style.css">
+    <script src="store.js" async></script>
   </head>
   <body>
     <header>
@@ -32,27 +33,29 @@
             </li>
             <li>
               <b>
-                <a href="our_team.html">
+                <a href="our_team.html" style="text-decoration: none;">
                   our team
                 </a>
               </b>
             </li>
             <li>
               <b>
-                <a href="#">
+                <a href="#" style="text-decoration: none;">
                   support
                 </a>
               </b>
             </li>
             <li>
               <b>
-                <a href="#">
+                <a href="#" style="text-decoration: none;">
                   account
                 </a>
               </b>
             </li>
             <li>
-              <img src="img/shoppingbag2.png" alt="shoppingbag">
+              <a href="shopping_cart.html" style="text-decoration: none;">
+                <img src="img/shoppingbag2.png" alt="shoppingbag">
+              </a>
             </li>
           </ul>
         </nav>
@@ -61,59 +64,65 @@
     <div class="container3"> 
       <!--creates a detailed product page in which you can change settings and buy items-->
         <div class="detail">
+          <!-- commented out so i may use the code later
             <div class="styles">
                 <img src="img/catbackp.jpg" alt="strawberry">
                 <img src="img/cbblackberry.jpg" alt="blackberry">
                 <img src="img/cbcrazyberry.jpg" alt="crazyberry">
                 <img src="img/cbfireorange.jpg" alt="fireorange">
             </div>
-            <img src="img/catbackp.jpg" alt="cat backpack">
+            -->
+            <img class="shop-item-image" src="img/cbcrazyberry.jpg" alt="cat backpack">
             <div class="detaildescript">
                 <h1>Cat Backpack</h1>
                 <p>100% recycled material</p>
-                <p>Strawberry</p>
+                <b>
+                  <div class="item-color">
+                    Crazyberry
+                  </div>
+                </b>
+                <div class="item-size">
+                  Tiny
+                </div>
                 <p class="price">$24.99</p>
                 <p class="quote"><i>"The best leash on the market.<br>
                      Truly worth the money spent"</i></p>
                 <div class="color">
                     <p><b>COLOR</b></p>
-                    <div class="custom-select" style="width:200px;">
-                        <select>
-                          <option value="1">Crazyberry</option>
-                          <option value="2">Strawberry</option>
-                          <option value="3">Blackberry</option>
-                          <option value="4">Fire Orange</option>
-
+                    <div class="custom-select " style="width:200px;">
+                        <select class="style">
+                          <option value="color1">Crazyberry</option>
+                          <option value="color2">Strawberry</option>
+                          <option value="color3">Blackberry</option>
+                          <option value="color4">Fire Orange</option>
                         </select>
                       </div>
                 </div>
                 <div class="size">
                     <p><b>SIZE</b></p>
                     <div class="custom-select" style="width:200px;">
-                        <select>
-                          <option value="1">Tiny</option>
-                          <option value="2">Small</option>
-                          <option value="3">Medium</option>
-                          <option value="4">Large</option>
-
+                        <select class="sizing">
+                          <option value="size1">Tiny</option>
+                          <option value="size2">Small</option>
+                          <option value="size3">Medium</option>
+                          <option value="size4">Large</option>
                         </select>
                       </div>
                 </div>
                 <div class="quantity">
                     <p><b>QUANTITY</b></p>
                     <div class="custom-select" style="width:200px;">
-                        <select>
+                        <select class="amount">
                           <option value="1">0</option>
                           <option value="2">1</option>
                           <option value="3">2</option>
                           <option value="4">3</option>
-
                         </select>
                       </div>
                 </div>
                 <div class="purchase">
-                    <button><b>+ Add to cart</b></button>
-                    <button><b>$ Purchase Now</b></button>
+                    <button class='btn shop-item-button' type='button'><b>+ Add to cart (0)</b></button>
+                    <button class='btn shop-item-button2' type='button'><b>$ Purchase Now</b></button>
                 </div>
             </div>
 

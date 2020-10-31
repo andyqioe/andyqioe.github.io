@@ -119,6 +119,31 @@ h2 {
     margin: 72px;
     align-items:center;
 }
+
+.btn {
+    display:flex;
+    background-color:#704F1F;
+    color: white;
+    border-radius: 5px;
+    border: transparent;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    opacity:.5;
+    background-color: #48b2b9;
+    color:white;
+    transition-duration: .5s;
+    
+}
+
+.delete-item {
+    background-color:red
+}
 /*for "our team page"*/
 
 .team .name {
@@ -151,6 +176,8 @@ h2 {
     margin:30px;
     border-radius:25px;
 }
+/* for cart prices*/
+
 
 /*container boxes for each page*/
 
@@ -160,6 +187,20 @@ h2 {
     padding-left: 25px;
     padding-right: 25px;
 
+}
+
+.container h3 {
+    font-size: 36px;
+    width: 1440px;
+    padding-left: 100px;
+    color: #F0CB83;
+    background-color: #704F1F;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .container2 {
@@ -181,6 +222,55 @@ h2 {
 
 }
 
+.subcontainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    margin-top: 50px;
+}
+
+.shoppingbag {
+    padding-left: 100px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+}
+
+.checkout {
+    width: 360px;
+    height: 900px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fffaef;
+    margin-top: 25px;
+    border-radius: 25px;
+}
+
+.checkout .text {
+    margin: 25px;
+    font-size:16px;
+}
+
+.text button {
+    display:flex;
+    background-color:#704F1F;
+    color: white;
+    border-radius: 5px;
+    border: transparent;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    margin-right: 10px;
+
+}
+
+.text button:hover {
+    opacity:.5;
+    background-color: #48b2b9;
+    color:white;
+    transition-duration: .5s;
+}
 /*for product detail pages*/
 
 .detail {
@@ -201,6 +291,16 @@ h2 {
     font-size: 72px;
     margin-bottom:20px;
     
+}
+
+.cart-item {
+    height: 200px;
+    margin: 30px;
+}
+
+.cart-item h1 {
+    font-size: 24px;
+    margin-bottom:20px;
 }
 
 .description2 h1{
@@ -296,6 +396,13 @@ h2 {
     flex-direction:column;
     margin-right:20px;
 }
+
+/*images*/
+
+.shoppingbag img {
+    height: 300px;
+}
+
 .styles img {
     height: 100px;
     margin-bottom:5px;
@@ -314,6 +421,24 @@ h2 {
     margin-bottom: 25px;
     border-radius: 25px;
 }
+
+.item2 img {
+    height: 250px;
+    margin: 50px;
+}
+
+.item2 {
+    width: 900px;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    background-color: #fffaef;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 25px;
+    border-radius: 25px;
+}
+
 /*general description boxes for each page*/
 
 .description {
@@ -334,12 +459,6 @@ h2 {
 }
 
 a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: #fff;
-
     background-color: #704F1F;
     border-radius: 25px;
     padding: 20px;
@@ -458,7 +577,9 @@ a.button {
 }
 
 .hotproducts h1 {
-    color: white;
+    width: 1260px;
+    color:#704F1F;
+    padding:10px;
     margin: 36px 0px;
 }
 
