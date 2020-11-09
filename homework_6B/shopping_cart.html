@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> Shopping Cart </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="JavaScript/store.js" async></script>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">
+          <a href="index.html">
+            <img src="img/title+logocombined.png" alt="logo">
+          </a>
+        </div>
+        <!-- this is for the nav bar -->
+        <nav>
+          <ul>
+            <li>
+              <b>
+                <a href="index.html" style="text-decoration: none;">
+                  home
+                </a>
+              </b>
+            </li>
+            <li>
+              <b>
+                <a href="products.html" style="text-decoration: none;">
+                  products
+                </a>
+              </b>
+            </li>
+            <li>
+              <b>
+                <a href="our_team.html" style="text-decoration: none;">
+                  our team
+                </a>
+              </b>
+            </li>
+            <li>
+              <b>
+                <a href="#" style="text-decoration: none;">
+                  support
+                </a>
+              </b>
+            </li>
+            <li>
+              <b>
+                <a href="#" style="text-decoration: none;">
+                  account
+                </a>
+              </b>
+            </li>
+            <li>
+              <a href="shopping_cart.html" style="text-decoration: none;">
+                <b>
+                  cart <span>(0)</span>
+                </b>
+                <img src="img/shoppingbag2.png" alt="shoppingbag">
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- main container -->
+    <div class="container">
+      <h3>Shopping Cart</h3>
+      <!--subcontainer contains entire shopping bag component-->
+      <div class="subcontainer">
+        <div class="shoppingbag">
+          <div class="item3">
+            <h4>
+              Your current cart items
+            </h4>
+          </div>
+          <div class="item2">
+            <img src="img/catbackp.png" alt="cat backpack">
+            <div class="cart-item">
+              <h1 class="item-name">
+                Cat Backpack
+              </h1>              
+              <b>
+                <div class="item-color">
+                  Crazyberry
+                </div>
+              </b>
+              <div class="item-size">
+                Tiny
+              </div>
+              <p class="item-price">$24.99</p>
+                <u>
+                  <a href="product_description.html">
+                    go back
+                  </a>
+                </u>
+              <div class="cart-price">
+                <p>
+                  Price:
+                  <b>$24.99</b>
+                </p>
+              </div>
+            </div>
+            <div class="cart-item">
+              <h1>Quantity</h1>
+              <div class="quantity">
+                <div class="custom-select" style="width:200px;">
+                    <input class="cart-quantity-input" type="number" min="1" max="20" value="1">
+                </div>
+              </div>
+              <button class="btn btn-danger delete-item" type="button">
+                REMOVE
+              </button>
+              <div class="cart-total">
+                <strong class="cart-total-title">
+                  Total
+                </strong>
+                <span class="cart-total-price">
+                  $24.99
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="item2">
+            <img src="img/catbackp.png" alt="cat backpack">
+            <div class="cart-item">
+              <h1 class="item-name">
+                Cat Backpack
+              </h1>              
+              <b>
+                <div class="item-color">
+                  Crazyberry
+                </div>
+              </b>
+              <div class="item-size">
+                Tiny
+              </div>
+              <p class="item-price">$24.99</p>
+                <u>
+                  <a href="product_description.html">
+                    go back
+                  </a>
+                </u>
+              <div class="cart-price">
+                <p>
+                  Price:
+                  <b>$24.99</b>
+                </p>
+              </div>
+            </div>
+            <div class="cart-item">
+              <h1>Quantity</h1>
+              <div class="quantity">
+                <div class="custom-select" style="width:200px;">
+                    <input class="cart-quantity-input" type="number" min="1" max="20" value="1">
+                </div>
+              </div>
+              <button class="btn btn-danger delete-item" type="button">
+                REMOVE
+              </button>
+              <div class="cart-total">
+                <strong class="cart-total-title">
+                  Total
+                </strong>
+                <span class="cart-total-price">
+                  $24.99
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="checkout">
+          <div class="text">
+            <b>Order Summary</b> 
+            <hr>
+            <p>Item(s) Subtotal: $24.99</p>
+            <p>Tax: $3.15</p>
+            <p><b>Order Total: $28.14</b></p>
+            <hr>
+            <button class="btn btn-checkout" type="button">
+              <b>
+                Checkout
+              </b>
+            </button>
+          </div>     
+        </div>
+      </div>
+      <div class="hotproducts">
+        <h1> You might like: </h1>
+        <div class="row2">
+          <div class="product">
+            <a href="product_description.html">
+              <img src="img/catbackp.jpg" alt="cat backpack">
+            </a>
+            <p>
+              <b>
+                Cat Backpack
+              </b>
+            </p>
+          </div>
+          <div class="product">
+            <a href="product_description.html">
+              <img src="img/dogharness.jpg" alt="dog harness">
+            </a>
+            <p>
+              <b>
+                Dog Harness
+              </b>
+            </p>
+          </div>
+          <div class="product">
+            <a href="product_description.html">
+              <img src="img/catharness.jpg" alt="cat harness">
+            </a>
+            <p>
+              <b>
+                Cat Harness
+              </b>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- trending products section -->
+    
+    <main>
+    </main>
+    <footer>
+      <div class="footercontainer">
+        <ul>
+          <li><b><a href="#">Customer Service</a></b></li>
+          <li><a href="#">contact us</a></li>
+          <li><a href="#">order status</a></li>
+          <li><a href="#">shipping</a></li>
+          <li><a href="#">returns & exchanges</a></li>
+        </ul>
+        <ul>
+          <li><b><a href="#">Customer Service</a></b></li>
+          <li><a href="#">contact us</a></li>
+          <li><a href="#">order status</a></li>
+          <li><a href="#">shipping</a></li>
+          <li><a href="#">returns & exchanges</a></li>
+        </ul>
+        <ul>
+          <li><b><a href="#">Customer Service</a></b></li>
+          <li><a href="#">contact us</a></li>
+          <li><a href="#">order status</a></li>
+          <li><a href="#">shipping</a></li>
+          <li><a href="#">returns & exchanges</a></li>
+        </ul>
+        <ul>
+          <li><b><a href="#">Customer Service</a></b></li>
+          <li><a href="#">contact us</a></li>
+          <li><a href="#">order status</a></li>
+          <li><a href="#">shipping</a></li>
+          <li><a href="#">returns & exchanges</a></li>
+        </ul>
+      </div>
+    </footer>
+    
+  </body>
+</html>
+
