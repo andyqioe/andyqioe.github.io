@@ -1,38 +1,51 @@
 /*remove cart item buttons*/
-var removeCartItemButtons = document.getElementsByClassName('btn-danger')
+var removeCartItemButtons = document.getElementsByClassName('btn-danger');
 for (var i = 0; i < removeCartItemButtons.length; i++) {
-    var button = removeCartItemButtons[i]
-    button.addEventListener('click', removeItem)
+    var button = removeCartItemButtons[i];
+    button.addEventListener('click', removeItem);
     /*i is the button value*/
 }
 
-var addToCartButtons = document.getElementsByClassName('shop-item-button')
+var addToCartButtons = document.getElementsByClassName('shop-item-button');
 for (var i = 0; i < addToCartButtons.length; i++) {
-    var button = addToCartButtons[i]
-    button.addEventListener('click', addToCartClicked)
+    var button = addToCartButtons[i];
+    button.addEventListener('click', addToCartClicked);
 }
 
+var ClearCartButton = document.getElementsByClassName('shop-item-button2');
+for (var i = 0; i < ClearCartButton.length; i++) {
+    var button = ClearCartButton[i];
+    button.addEventListener('click', clearCart);
+}
 
 /*functions*/
 
+//clears local storage and cart
+function clearCart() {
+    localStorage.setItem('cartNumbers', 0);
+    document.querySelector('.add-cart span').textContent = '(' + 0 + ')';
+    document.querySelector('.navbar span').textContent = '(' + 0 + ')';
+    localStorage.clear()
+}
+
 function removeItem(event) {
-    var buttonClicked = event.target
-    buttonClicked.parentElement.parentElement.remove()
-    updateCartTotal()
+    var buttonClicked = event.target;
+    buttonClicked.parentElement.parentElement.remove();
+    updateCartTotal();
 }
 
-var changeColorButton = document.getElementsByClassName('style')
+var changeColorButton = document.getElementsByClassName('style');
 for (var i = 0; i < changeColorButton.length; i++) {
-    var button = changeColorButton[i]
-    var color = button.parentElement
-    button.addEventListener('click', changeDetail)
+    var button = changeColorButton[i];
+    var color = button.parentElement;
+    button.addEventListener('click', changeDetail);
 }
 
-var changeSizeButton = document.getElementsByClassName('sizing')
+var changeSizeButton = document.getElementsByClassName('sizing');
 for (var i = 0; i < changeSizeButton.length; i++) {
-    var button = changeSizeButton[i]
-    var color = button.parentElement
-    button.addEventListener('click', changeSize)
+    var button = changeSizeButton[i];
+    var color = button.parentElement;
+    button.addEventListener('click', changeSize);
 }
 
 
@@ -44,11 +57,11 @@ let products = [
         tag: 'catbackpack',
         color: 'crazyberry',
         size: 'tiny',
+        img: 'img/cbcrazyberry.jpg',
         price: 25,
         inCart: 0
     }
 ]
-
 
 /*changes product detail*/
 function changeDetail(event) {
@@ -58,30 +71,35 @@ function changeDetail(event) {
         descript.getElementsByClassName('shop-item-image')[0].src = 'img/cbcrazyberry.jpg';
         descript.getElementsByClassName('item-color')[0].innerText = 'Crazyberry';
         products[0].color = 'crazyberry';
+        products[0].img = 'img/cbcrazyberry.jpg';
     }
     else if (buttonClicked.value == 'color2' ) {
         var descript = buttonClicked.parentElement.parentElement.parentElement.parentElement;
         descript.getElementsByClassName('shop-item-image')[0].src = 'img/catbackp.jpg';
         descript.getElementsByClassName('item-color')[0].innerText = 'Strawberry';
         products[0].color = 'strawberry';
+        products[0].img = 'img/catbackp.jpg';
     }
+
     else if (buttonClicked.value == 'color3') {
         var descript = buttonClicked.parentElement.parentElement.parentElement.parentElement;
         descript.getElementsByClassName('shop-item-image')[0].src = 'img/cbblackberry.jpg';
         descript.getElementsByClassName('item-color')[0].innerText = 'Blackberry';
         products[0].color = 'blackberry';
+        products[0].img = 'img/cbblackberry.jpg';
     }
     else if (buttonClicked.value == 'color4') {
         var descript = buttonClicked.parentElement.parentElement.parentElement.parentElement;
         descript.getElementsByClassName('shop-item-image')[0].src = 'img/cbfireorange.jpg';
         descript.getElementsByClassName('item-color')[0].innerText = 'Fire Orange';
         products[0].color = 'fireorange';
+        products[0].img = 'img/cbfireorange.jpg';
     }
 
 }
 
 function changeSize(event) {
-    var buttonClicked = event.target
+    var buttonClicked = event.target;
     if (buttonClicked.value == 'size1') {
         var descript = buttonClicked.parentElement.parentElement.parentElement.parentElement;
         descript.getElementsByClassName('item-size')[0].innerText = 'Tiny';
@@ -118,26 +136,27 @@ function changeSize(event) {
 let carts = document.querySelectorAll('.add-cart');
 
 /*grabs individual carts*/
-
-
-
 for (let i = 0; i < carts.length; i++) {
     carts[i].addEventListener('click', function(event) {
         for (let j = 0; j < products.length; j++) {
             if (products[j].color == 'crazyberry') {
                 cartNumbers(products[j]);
+                console.log("a")
                 break;
             }
             else if (products[j].color == 'strawberry') {
                 cartNumbers(products[j]);
+                console.log("b")
                 break;
             }
             else if (products[j].color == 'blackberry') {
                 cartNumbers(products[j]);
+                console.log("c")
                 break;
             }
             else if (products[j].color == 'fireorange') {
                 cartNumbers(products[j]);
+                console.log("d")
                 break;
             }
         }
@@ -145,14 +164,16 @@ for (let i = 0; i < carts.length; i++) {
     })
 }
 
+/*updates page based on current local storage*/
 function onLoadCartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');
     if (productNumbers) {
-        document.querySelector('.add-cart span').textContent = '(' + productNumbers + ')'
-        document.querySelector('.navbar span').textContent = '(' + productNumbers + ')'
+        document.querySelector('.add-cart span').textContent = '(' + productNumbers + ')';
+        document.querySelector('.navbar span').textContent = '(' + productNumbers + ')';
     }
 }
 
+/*updates cart */
 function cartNumbers(product) {
     console.log(product);
     let productNumbers = localStorage.getItem('cartNumbers');
@@ -163,46 +184,76 @@ function cartNumbers(product) {
     /* checks if item has already been clicked */
     if (productNumbers) {
         localStorage.setItem('cartNumbers', productNumbers + 1);
-        document.querySelector('.add-cart span').textContent = '(' + (productNumbers + 1) + ')'
-        document.querySelector('.navbar span').textContent = '(' + (productNumbers + 1) + ')'
+        document.querySelector('.add-cart span').textContent = '(' + (productNumbers + 1) + ')';
+        document.querySelector('.navbar span').textContent = '(' + (productNumbers + 1) + ')';
     } else {
         localStorage.setItem('cartNumbers', 1);
-        document.querySelector('.add-cart span').textContent = '(' + '1' + ')'
-        document.querySelector('.navbar span').textContent = '(' + '1' + ')'
+        document.querySelector('.add-cart span').textContent = '(' + '1' + ')';
+        document.querySelector('.navbar span').textContent = '(' + '1' + ')';
     }
+    setItems(product);
 }
 
+/*sets item on local storage*/
+function setItems(product) {
+    console.log(product);
+    let cartItems = localStorage.getItem('productsInCart');
+    cartItems = JSON.parse(cartItems);
 
-var numCartItems = 0
+    if (cartItems != null) {
+        cartItems[product.tag].inCart += 1
+    } else {
+        product.inCart = 1;
+        cartItems = {
+            [product.tag]: product
+        }
+    }   
+    localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+}
+
 
 function addToCartClicked(event) {
 
-    /* addItemToCart(title, price, image) */
+    var title = document.getElementsByClassName('item-name')[0].innerText;
+    var price = document.getElementsByClassName('item-price')[0].innerText;
+    var color = document.getElementsByClassName('item-color')[0].innerText;
+    var size = document.getElementsByClassName('item-size')[0].innerText;
+    var image = document.getElementsByClassName('shop-item-image')[0].src;
+    localStorage.setItem("name", title)
+    localStorage.setItem("price", price)
+    localStorage.setItem("img", image)
+    localStorage.setItem("color", color)
+    localStorage.setItem("size", size)
+    // addItemToCart(title, price, image)
 }
 
-/*
-function addItemToCart(title, price, image) {
-    var cartRow = document.createElement('div')
-    cartRow.innerText = title
-    var cartItems = document.getElementsByClassName('shoppingbag')[0]
-    cartItems.append(cartRow)
-}
-*/
+
+// function addItemToCart(title, price, image) {
+//     emptyDictionary.name = title;
+//     emptyDictionary.price = price;
+//     emptyDictionary.img = image;
+//     console.log(emptyDictionary)
+//     products.appendChild(emptyDictionary)
+// }
+
+
+
+/* creates number of product listings based on items in product list*/
 
 function updateCartTotal() {
-    var cartItemContainer = document.getElementsByClassName('cart-item')
-    var cartRows = document.getElementsByClassName('item2')
-    var total = 0
+    var cartItemContainer = document.getElementsByClassName('cart-item');
+    var cartRows = document.getElementsByClassName('item2');
+    var total = 0;
     for (var i = 0; i < cartRows.length; i++) {
-        var cartRow = cartRows[i]
-        var priceElement = cartRow.getElementsByClassName('cart-price')[0]
-        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
-        var price = parseFloat(priceElement.innerText.replace('$', ''))
-        var quantity = quantityElement.value
-        total = total + (price * quantity)
-        console.log(total)
+        var cartRow = cartRows[i];
+        var priceElement = cartRow.getElementsByClassName('cart-price')[0];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0];
+        var price = parseFloat(priceElement.innerText.replace('$', ''));
+        var quantity = quantityElement.value;
+        total = total + (price * quantity);
+        console.log(total);
     }
-    document.getElementsByClassName('cart-total-price')[0].innerText = total
+    document.getElementsByClassName('cart-total-price')[0].innerText = total;
 }
 
 onLoadCartNumbers();
