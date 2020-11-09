@@ -34,6 +34,70 @@ function removeItem(event) {
     updateCartTotal();
 }
 
+function displayCart() {
+    let cartItems = localStorage.getItem("productsInCart");
+    cartItems = JSON.parse(cartItems);
+
+    let productContainer = document.querySelector
+    if (cartItems && productContainer) {
+        productContainer.innerHTML = '';
+        Object.values(cartItems).map(item => {
+            productContainer.innerHTML += `
+            <div class="item2">
+            <img src="img/catbackp.png" alt="cat backpack">
+            <div class="cart-item">
+              <h1 class="item-name">
+                Cat Backpack
+              </h1>              
+              <div class="item-color">
+                <b>
+                  Crazyberry
+                </b>
+              </div>
+              <div class="item-size">
+                Tiny
+              </div>
+              <p class="item-price">$24.99</p>
+                <u>
+                  <a href="product_description.html">
+                    go back
+                  </a>
+                </u>
+              <div class="cart-price">
+                <p>
+                  Price:
+                  <b>$24.99</b>
+                </p>
+              </div>
+            </div>
+            <div class="cart-item">
+              <h1>Quantity</h1>
+              <div class="quantity">
+                <div class="custom-select" style="width:200px;">
+                    <input class="cart-quantity-input" type="number" min="1" max="20" value="1">
+                </div>
+              </div>
+              <button class="btn btn-danger delete-item" type="button">
+                REMOVE
+              </button>
+              <div class="cart-total">
+                <strong class="cart-total-title">
+                  Total
+                </strong>
+                <span class="cart-total-price">
+                  $24.99
+                </span>
+              </div>
+            </div>
+          </div>
+            
+            `
+        })
+    }
+}
+
+
+
 var changeColorButton = document.getElementsByClassName('style');
 for (var i = 0; i < changeColorButton.length; i++) {
     var button = changeColorButton[i];
@@ -47,6 +111,8 @@ for (var i = 0; i < changeSizeButton.length; i++) {
     var color = button.parentElement;
     button.addEventListener('click', changeSize);
 }
+
+//reads local storage and adds to current cart
 
 
 /* product dictionary */
@@ -168,8 +234,8 @@ for (let i = 0; i < carts.length; i++) {
 function onLoadCartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');
     if (productNumbers) {
-        document.querySelector('.add-cart span').textContent = '(' + productNumbers + ')';
         document.querySelector('.navbar span').textContent = '(' + productNumbers + ')';
+        document.querySelector('.add-cart span').textContent = '(' + productNumbers + ')';
     }
 }
 
@@ -236,8 +302,6 @@ function addToCartClicked(event) {
 //     products.appendChild(emptyDictionary)
 // }
 
-
-
 /* creates number of product listings based on items in product list*/
 
 function updateCartTotal() {
@@ -257,3 +321,4 @@ function updateCartTotal() {
 }
 
 onLoadCartNumbers();
+displayCart();
