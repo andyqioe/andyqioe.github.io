@@ -34,6 +34,7 @@ function removeItem(event) {
     updateCartTotal();
 }
 
+//wip, gets & displays selection on shopping cart
 function displayCart() {
     let cartItems = localStorage.getItem("productsInCart");
     cartItems = JSON.parse(cartItems);
@@ -47,15 +48,15 @@ function displayCart() {
             <img src="img/catbackp.png" alt="cat backpack">
             <div class="cart-item">
               <h1 class="item-name">
-                Cat Backpack
+                ${item.name}
               </h1>              
               <div class="item-color">
                 <b>
-                  Crazyberry
+                ${item.color}
                 </b>
               </div>
               <div class="item-size">
-                Tiny
+              ${item.size}
               </div>
               <p class="item-price">$24.99</p>
                 <u>
@@ -66,7 +67,7 @@ function displayCart() {
               <div class="cart-price">
                 <p>
                   Price:
-                  <b>$24.99</b>
+                  <b>${item.price}</b>
                 </p>
               </div>
             </div>
@@ -90,7 +91,6 @@ function displayCart() {
               </div>
             </div>
           </div>
-            
             `
         })
     }
@@ -235,7 +235,10 @@ function onLoadCartNumbers() {
     let productNumbers = localStorage.getItem('cartNumbers');
     if (productNumbers) {
         document.querySelector('.navbar span').textContent = '(' + productNumbers + ')';
-        document.querySelector('.add-cart span').textContent = '(' + productNumbers + ')';
+        if (document.querySelector('.add-cart span').textContent != null) {
+            document.querySelector('.add-cart span').textContent = '(' + productNumbers + ')';
+        }
+        
     }
 }
 
@@ -317,7 +320,7 @@ function updateCartTotal() {
         total = total + (price * quantity);
         console.log(total);
     }
-    document.getElementsByClassName('cart-total-price')[0].innerText = total;
+    //document.getElementsByClassName('cart-total-price')[0].innerText = total;
 }
 
 onLoadCartNumbers();
