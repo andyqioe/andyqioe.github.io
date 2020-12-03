@@ -1,0 +1,3 @@
+cd /mnt/c/Users/Andy/Documents/GitHub/ajqiu.github.io/homework_78
+
+cd /mnt/c/Users/Andy/Documents/GitHub/MEME/andy/ANDY/Gates\ 6.01\ 7.02\ 8.05\ v8\ iPad/HTML
