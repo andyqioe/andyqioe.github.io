@@ -1,17 +1,78 @@
 let scene, camera, renderer, stars;
 
-/*global vars*/
+//global vars
 var accel = 0.001;
 var veloStart = Math.random()/2;
+var num = -0.0005;
+var timer = 1;
+var randAccelList = [];
+var randAccelListSlower = [];
+var strength = .5;
+var strength2 = 0.01;
+var rotationToggle = false;
+var incrementer = .0000001;
+var ease = 0.01;
+var defaultEase = 0.0002;
+
+// particle speed
+var speed = 1.001;
+var speedIncrement = 1.001;
 init();
 
+
+// functions 
+function cubicEaseInOut(t, b, c, d) {
+	t /= d;
+	return c*t*t*t + b;
+};
+
+function easeOutCubic(t, b, c, d) {
+	t /= d;
+	t--;
+	return c*(t*t*t + 1) + b;
+};
+
+function easing(n) {
+    return Math.log(n)
+}
+
+
+/* rgb to hex */
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+  
+  function rgbToHex(r, g, b) {
+    return "0x" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  }
+  
+function generateRandomColor() {
+    r = Math.round(Math.random() * 255)
+    g = Math.round(Math.random() * 255)
+    b = Math.round(Math.random() * 255)
+    return rgbToHex(r, g, b)
+}
+
+/* purple to blue */
+function generateRandomColor() {
+    r = 51
+    g = randomIntFromInterval(150, 237)
+    b = 255
+    return rgbToHex(r, g, b)
+}
+
+
+//initialize
 function init() {
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x111111, 150, 200);
+    scene.fog = new THREE.Fog(0x111111, 50, 200);
 
-    camera = new THREE.PerspectiveCamera(60,window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 1;
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+    camera.position.z = 0;
     camera.rotation.x = Math.PI/2;
+    camera.rotation.z = Math.PI/2;
+    camera.position.y = -100;
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -19,90 +80,212 @@ function init() {
 
 /* generates new geometry */
     starGeo = new THREE.Geometry();
+    starPoints = [];
+    count = 10000;
+    numVertex = 100;
+    r = 35;
+    theta = 2*Math.PI;
+    phi = Math.PI/2;
+    velocity = 0.02;
+    savedPoints = [];
+    savedUnitVectors = [];
     
-    starPoints = []
-    count = 6000
+    for (let i=0; i<numVertex; i++) {
+        const newRadius = r * Math.cos((i* Math.PI/numVertex) + phi);
+        const newZ = r * Math.sin((i* Math.PI/numVertex) + phi);
 
-    for(let i=0; i <count; i++) { 
-        rand1 = Math.random() * 600 - 300
-        rand2 = Math.random() * 600 - 300
-        rand3 = Math.random() * 600 - 300
-        let star = new THREE.Vector3();
-        star.x = rand1 
-        star.y = rand2 
-        star.z = rand3
-        starPoints.push(star)
-    }
+        for (let j=0; j<numVertex; j++) {
+            const star = new THREE.Vector3();
+            star.x = newRadius * Math.cos(j * theta/numVertex);
+            star.y = newRadius * Math.sin(j * theta/numVertex);
+            star.z = newZ;
+            star.velocity = 0.02;
+            star.acceleration = 0.01;
+            
+            const a = star.normalize()
+            savedUnitVectors.push(a)
+
+            a.x *= r;
+            a.y *= r;
+            a.z *= r;
+
+            starGeo.vertices.push(a);
+            savedPoints.push(a);
+            
+        }
+    }   
     
-    function distanceSort(a,b) {
-        return b.manhattanDistanceTo(camera.position) - a.manhattanDistanceTo(camera.position);
+    material = new THREE.TextureLoader().load('img/star.png');
+    starMaterial =  new THREE.PointsMaterial({
+        size: 0.2,
+        map: material
+    })
+
+    for (let i=0; i<starGeo.vertices.length; i++) {
+        point = savedUnitVectors[i]
+
+        m = (Math.random()*((1.00 + strength2) - (1.00 - strength2)) + (1.00 - strength2));
+        randAccelList.push(m)
+
+        n = (Math.random()*((1.00 + strength2) - (1.00 - strength2)) + (1.00 - strength2));
+        randAccelListSlower.push(n)
     }
 
-    starPoints.sort(distanceSort);
-
-/* creates vertices inside geometry */
-    for(let i=0; i<count; i++) {
-        star = starPoints[i]
-        star.velocity = Math.random()/2;
-        star.acceleration = accel;
-        /* adds vertices to the starGeo geometry */
-        starGeo.vertices.push(star);
-    }
-
-    /* loads img texture */
-    let sprite = new THREE.TextureLoader().load('img/star.png');
-    let texture = new THREE.TextureLoader().load('img/alphamap.png');
-    let starMaterial = new THREE.PointsMaterial({
-        color: 0xFF0000,
-        size: 0.5,
-        map: sprite,
-    });
-
-    const object = new THREE.Object3D();
-    scene.add(object);
     stars = new THREE.Points(starGeo, starMaterial);
     scene.add(stars);
     animate();
 }
 
-/* generate random int */
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-/* animate */
 
-count = 0
-let num = -0.0005
+function distance(a, b, c) {
+    return Math.sqrt(a**2 + b**2 + c**2)
+}
 
 function animate() {
+    timer += 1;
+    
+        /* starGeo.vertices = savedPoints; */
+    
+    var acceleration = 1.001
+        // transformation 
+    
+    var withEasing = cubicEaseInOut(timer/1000, 0, 0.35, 1)
+    var withEasing2 = easeOutCubic(timer/1000, 0, 0.35, 1)
 
-    /* resets count */
-    /* console.log(count)  */
 
-    starGeo.vertices.forEach(p=>{
-        p.velocity += p.acceleration
-        p.y += p.velocity;
-        p.x -= p.velocity;
-        /* if(p.y < -200) {
-            p.y = 200;
-            p.velocity = 0;
-        } */
-        if(p.y > 300) {
-            p.y = -300;
-            
+    incrementer += 0.0001;
+    var retract = incrementer
+
+    // splash
+
+    // expand
+
+    if (timer < 100) {
+        if ((ease > 0) & (ease != defaultEase)) {
+            ease -= withEasing2/1000
         }
-        if(p.x < -300) {
-            p.x = 300;
+        else if (ease < 0) {
+            ease = defaultEase
+        }
+        for (let i=0; i<starGeo.vertices.length; i++) {
+            var p = savedPoints[i];
+            var temp = randAccelList[i]
+            var randVelo = (Math.random()*((0.99999) - (0.99999 - strength)) + (0.99999 - strength))
+            
+            if ((distance(p.x, p.y, p.z) < r + 5) & (distance(p.x, p.y, p.z) > r - 20)) {
+                nX = p.x * temp * ease;
+                nY = p.y * temp * ease;
+                nZ = p.z * temp * ease; 
+            }
+    
+            else if (distance(p.x, p.y, p.z) >= r + 5) {
+                nX = 0;
+                nY = 0;
+                nZ = 0; 
+            }
+            
+            
+            var ps = starGeo.vertices[i]
+            ps.x += nX  
+            ps.y += nY
+            ps.z += nZ
+        }
+    }
+    
+    // hyperspace
+    
+    if (timer >= 100) {
+        if (speed < 3.00) {
+            speed *= speedIncrement
+        }
+
+        if (speed > 3.00) {
+            speed = 3.00;
+        }
+
+        for (let i=0; i<starGeo.vertices.length; i++) {
+            
+            var u = savedUnitVectors[i];
+            var p = savedPoints[i];
+            var temp = randAccelListSlower[i]
+            var tempR = 50
+
+            nX = p.x * temp * ease;
+            nY = p.y * temp * ease;
+            nZ = p.z * temp * ease; 
+            // var randVelo = (Math.random()*((0.99999) - (0.99999 - strength2)) + (0.99999 - strength2))
+            
+            if ((distance(p.x, p.y, p.z) < r + 40) & (distance(p.x, p.y, p.z) > r)) {
+                nX = ((p.x) - tempR *u.x);
+                nY = ((p.y) - tempR *u.y);
+                nZ = ((p.y) - tempR *u.z); 
+            }   
+    
+            else if (distance(p.x, p.y, p.z) < r) {
+                nX = -((p.x) - tempR *u.x);
+                nY = -((p.y) - tempR *u.y);
+                nZ = -((p.z) - tempR *u.z); 
+            }
+            
+            var ps = starGeo.vertices[i]
+            ps.x += nX/500
+            ps.y += nY/500
+            ps.z += nZ/500
+
+            if (distance(p.x, p.y, p.z) < r - 15) {
+                rotationToggle = true;
+            }   
+        }
+    }
+        /* camera.rotation.x += 0.01 */
+        /* camera.rotation.y += 0.01 */
+    var rotationSpeed = easing(timer) * 10**-4;
+    var movingSpeed = easing(timer) * 10**-3 + 0.5;
+    /* if (rotationToggle == true) {
+        camera.rotation.z += rotationSpeed; 
+        camera.position.y += .5
+    } */
+    /* camera.rotation.z += rotationSpeed;  */
+    /* camera.position.y += movingSpeed; */
+        
+
+/*     starGeo.vertices.forEach(p=>{
+        randomIntFromInterval(1, 1);
+        temp = (Math.random()*0.01 + 1);
+
+        if (distance(p.x, p.y, p.z) < r + 10) {
+            p.x *= temp
+            p.y *= temp
+            p.z *= temp
         }
         
-    })
+        p.velocity += p.acceleration
 
+    }) */
+
+
+    /* my transition!! */
+/*     starGeo.vertices.forEach(p=>{
+        randomIntFromInterval(1, 1)
+        temp = (Math.random()*0.01 + 1)
+        p.x *= temp
+        p.y *= temp
+        p.z *= temp
+
+        if ((p.y > r-5) || (p.y < r-5)) {
+            p.x *= temp
+            p.y *= temp
+            p.z *= temp
+        }
+        p.velocity += p.acceleration
+
+    }) */
+    /* camera.position.y += 0.05 */
+    
     starGeo.verticesNeedUpdate = true;
-    /* stars.rotation.y += num; */
-
-    if ((stars.rotation.y > .2) || (stars.rotation.y < -.2)) {
-        num *= -1
-    }
     
     renderer.render(scene,camera);
     requestAnimationFrame(animate);
