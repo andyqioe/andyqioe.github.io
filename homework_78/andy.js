@@ -48,9 +48,9 @@ function componentToHex(c) {
   }
   
 function generateRandomColor() {
-    r = Math.round(Math.random() * 255)
-    g = Math.round(Math.random() * 255)
-    b = Math.round(Math.random() * 255)
+    r = Math.round(Math.random() * 255);
+    g = Math.round(Math.random() * 255);
+    b = Math.round(Math.random() * 255);
     return rgbToHex(r, g, b)
 }
 
@@ -72,7 +72,7 @@ function init() {
     camera.position.z = 0;
     camera.rotation.x = Math.PI/2;
     camera.rotation.z = Math.PI/2;
-    camera.position.y = -100;
+    camera.position.y = -150;
 
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -114,6 +114,8 @@ function init() {
             
         }
     }   
+
+    
     
     material = new THREE.TextureLoader().load('img/star.png');
     starMaterial =  new THREE.PointsMaterial({
@@ -127,7 +129,7 @@ function init() {
         m = (Math.random()*((1.00 + strength2) - (1.00 - strength2)) + (1.00 - strength2));
         randAccelList.push(m)
 
-        n = (Math.random()*((1.00 + strength2) - (1.00 - strength2)) + (1.00 - strength2));
+        n = (Math.random()*((1.00 + strength) - (1.00 - strength2)) + (1.00 - strength2));
         randAccelListSlower.push(n)
     }
 
@@ -163,7 +165,7 @@ function animate() {
 
     // expand
 
-    if (timer < 100) {
+   /*  if (timer < 100) {
         if ((ease > 0) & (ease != defaultEase)) {
             ease -= withEasing2/1000
         }
@@ -175,13 +177,13 @@ function animate() {
             var temp = randAccelList[i]
             var randVelo = (Math.random()*((0.99999) - (0.99999 - strength)) + (0.99999 - strength))
             
-            if ((distance(p.x, p.y, p.z) < r + 5) & (distance(p.x, p.y, p.z) > r - 20)) {
+            if ((distance(p.x, p.y, p.z) < r + 40) & (distance(p.x, p.y, p.z) > r - 20)) {
                 nX = p.x * temp * ease;
                 nY = p.y * temp * ease;
                 nZ = p.z * temp * ease; 
             }
     
-            else if (distance(p.x, p.y, p.z) >= r + 5) {
+            else if (distance(p.x, p.y, p.z) >= r + 40) {
                 nX = 0;
                 nY = 0;
                 nZ = 0; 
@@ -193,11 +195,11 @@ function animate() {
             ps.y += nY
             ps.z += nZ
         }
-    }
+    } */
     
     // hyperspace
     
-    if (timer >= 100) {
+   /*  if ((timer >= 100) & (timer < 10000)){
         if (speed < 3.00) {
             speed *= speedIncrement
         }
@@ -218,16 +220,17 @@ function animate() {
             nZ = p.z * temp * ease; 
             // var randVelo = (Math.random()*((0.99999) - (0.99999 - strength2)) + (0.99999 - strength2))
             
-            if ((distance(p.x, p.y, p.z) < r + 40) & (distance(p.x, p.y, p.z) > r)) {
-                nX = ((p.x) - tempR *u.x);
-                nY = ((p.y) - tempR *u.y);
-                nZ = ((p.y) - tempR *u.z); 
+            if ((distance(p.x, p.y, p.z) < r + 50) & (distance(p.x, p.y, p.z) > r + 20)) {
+                nX = ((p.x * temp) - tempR *u.x);
+                nY = ((p.y * temp) - tempR *u.y);
+                nZ = ((p.y * temp) - tempR *u.z); 
+                
             }   
-    
-            else if (distance(p.x, p.y, p.z) < r) {
-                nX = -((p.x) - tempR *u.x);
-                nY = -((p.y) - tempR *u.y);
-                nZ = -((p.z) - tempR *u.z); 
+            
+            else if (distance(p.x, p.y, p.z) < r + 50) {
+                nX = -((p.x * temp) - tempR *u.x);
+                nY = -((p.y * temp) - tempR *u.y);
+                nZ = -((p.z * temp) - tempR *u.z); 
             }
             
             var ps = starGeo.vertices[i]
@@ -239,6 +242,26 @@ function animate() {
                 rotationToggle = true;
             }   
         }
+    } */
+
+    //disperse
+    if (timer >= 100) {
+
+        starGeo.vertices.forEach(p=>{
+            randomIntFromInterval(1, 1)
+            temp = (Math.random()*0.01 + 1)
+            p.x *= temp
+            p.y *= temp
+            p.z *= temp
+    
+            if ((p.y > r-5) || (p.y < r-5)) {
+                p.x *= temp
+                p.y *= temp
+                p.z *= temp
+            }
+            p.velocity += p.acceleration
+
+        })
     }
         /* camera.rotation.x += 0.01 */
         /* camera.rotation.y += 0.01 */
