@@ -18,6 +18,40 @@ html {
     font-style: normal; */
 
 }
+
+/* loader */
+
+.loader {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border: 4px solid #Fff;
+    top: 50%;
+    animation: loader 2s infinite ease;
+  }
+  
+  .loader-inner {
+    vertical-align: top;
+    display: flex;
+    height: 30px;
+    width: 30px;
+    background-color: #fff;
+    animation: loader-inner 2s infinite ease-in;
+  }
+
+  .loader-wrapper {
+      background-color: black;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+  }
+  
+  }
+
 /* page content master css */
 #page-content {
     display: flex; 
@@ -48,7 +82,7 @@ html {
 }
 
 .name {
-    font-size: 32px;
+    font-size: 48px;
 }
 
 .interactive {
@@ -79,7 +113,7 @@ a:hover, a:active { text-decoration: none; color:#ffffff}
 
 
 .nav-height {
-    opacity: 80%;
+    opacity: 100%;
     background-color:transparent;
     width: 25vw;
     height: 100vh;
@@ -90,18 +124,12 @@ a:hover, a:active { text-decoration: none; color:#ffffff}
     z-index: 1;
 }
 
-.nav-height .name {
-    
 
-}
 
 .flexnav {
     padding-right: 40px;
 }
 
-.nav-height .outer {
-    
-}
 /* controls z-index of sphere layer */
 
 canvas {
@@ -115,7 +143,8 @@ canvas {
 body {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 /* on click message */
 
@@ -147,9 +176,76 @@ body {
     font-size: 12px;
 }
 
+/* project wrapper section */
+
+.gallery-wrapper {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+}   
+.gallery-units {
+    margin: auto;
+}
+.gallery-units img {
+    width: 50vw;
+    margin-left: 300px;
+    border-radius: 40px;   
+}
+
+.project-wrapper {
+     
+    position:relative;
+    display: flex;
+    flex-direction: column;
+}   
+.project-units {
+    padding: 20px;
+    margin: auto;
+}
+.project-units img {
+    width: 50vw;
+    margin-left: 300px;
+    border-radius: 40px;
+    
+}
+
+.project-banner {
+    padding: 20px;
+    margin: auto;
+
+    
+}
+
+.gallery-units img:hover {
+    opacity: 100%;
+    animation: fade .25s ease-out;
+}
+
+
+/* about me page */
+
+.about-me {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+.about-me img{
+    height: 400px;
+    border-radius: 50px;
+    display: flex;
+
+}
+.about-me .description {
+    max-width: 600px;
+    margin: 50px;
+}
+
 @media only screen and (max-width: 991px) {
     .nav-height {
-        opacity: 80%;
+        opacity: 100%;
         background-color:transparent;
         width: 100vw;
         height: 15vh;
@@ -158,6 +254,22 @@ body {
         align-items: center;
         justify-content: center;
         z-index: 1;
+    }
+
+    .project-units img {
+        margin-left: 0px;
+    }
+
+    .project-wrapper {
+        margin-top: 175px;
+    }
+
+    .gallery-units img {
+        margin-left: 0px;
+    }
+
+    .gallery-wrapper {
+        margin-top: 175px;
     }
 }
 
@@ -178,3 +290,66 @@ body {
         opacity: .8;
     }
 }
+/* fade */
+
+@keyframes fade {
+    0% {
+        opacity: 100%;
+      }
+    100% {
+        opacity: 50%;
+      }
+}
+@keyframes unfade {
+    0% {
+        opacity: 50%;
+      }
+    100% {
+        opacity: 100%;
+      }
+}
+
+/* loader animation */
+
+@keyframes loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    
+    25% {
+      transform: rotate(180deg);
+    }
+    
+    50% {
+      transform: rotate(180deg);
+    }
+    
+    75% {
+      transform: rotate(360deg);
+    }
+    
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes loader-inner {
+    0% {
+      height: 0%;
+    }
+    
+    25% {
+      height: 0%;
+    }
+    
+    50% {
+      height: 100%;
+    }
+    
+    75% {
+      height: 100%;
+    }
+    
+    100% {
+      height: 0%;
+    }
