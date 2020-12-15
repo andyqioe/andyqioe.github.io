@@ -10,15 +10,6 @@ html {
     overflow: hidden;
 }
 
-/*   @font-face {
-    font-family: 'voltemedium';
-    src: url('volte_medium-webfont.woff2') format('woff2'),
-         url('volte_medium-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal; */
-
-}
-
 /* loader */
 
 .loader {
@@ -50,7 +41,6 @@ html {
       z-index: 2;
   }
   
-  }
 
 /* page content master css */
 #page-content {
@@ -82,6 +72,8 @@ html {
 }
 
 .name {
+    list-style-type: none;
+    border-bottom:white;
     font-size: 48px;
 }
 
@@ -101,6 +93,7 @@ html {
     align-content: center;
     justify-content: center;
     font-size: 16px;
+    padding: 5px;
     text-decoration: none;
 }
 
@@ -155,7 +148,7 @@ body {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding: -50px;
+    /* padding: -50px; */
     margin-bottom: -20px;
     z-index: 1;
 }
@@ -184,12 +177,17 @@ body {
     flex-direction: column;
 }   
 .gallery-units {
+    display:flex;
+    flex-direction:column;
+    align-items: flex-end;
     margin: auto;
+    padding: 5px;
 }
 .gallery-units img {
     width: 50vw;
     margin-left: 300px;
     border-radius: 40px;   
+    
 }
 
 .project-wrapper {
@@ -199,8 +197,11 @@ body {
     flex-direction: column;
 }   
 .project-units {
-    padding: 20px;
+    display:flex;
+    flex-direction:column;
+    align-items: flex-end;
     margin: auto;
+    padding: 5px;
 }
 .project-units img {
     width: 50vw;
@@ -212,12 +213,10 @@ body {
 .project-banner {
     padding: 20px;
     margin: auto;
-
-    
 }
 
 .gallery-units img:hover {
-    opacity: 100%;
+    opacity: 50%;
     animation: fade .25s ease-out;
 }
 
@@ -353,3 +352,4 @@ body {
     100% {
       height: 0%;
     }
+  }

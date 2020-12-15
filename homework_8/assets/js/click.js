@@ -6,10 +6,6 @@ $(function(){
         $("#message").remove()
     });
     
-    //on load
-    $(window).on("load",function(){
-        console.log("loaded")
-    })
 })
 
 
