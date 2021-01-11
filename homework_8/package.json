@@ -1,0 +1,18 @@
+{
+  "name": "homework_8",
+  "version": "1.0.0",
+  "description": "bundle.js is a compiled script that uses terminal command npm run deploy.",
+  "main": "index.js",
+  "dependencies": {
+    "three": "^0.123.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
